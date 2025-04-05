@@ -32,7 +32,7 @@ def match_medication(extracted_text, database):
     return best_match, highest_score
 
 # Load the image
-image_path = 'right.jpeg'
+image_path = 'shaky.jpeg'
 img = cv2.imread(image_path)
 
 # Check if image was loaded successfully
