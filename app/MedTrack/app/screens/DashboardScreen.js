@@ -1,6 +1,6 @@
 import React from 'react'
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TouchableWithoutFeedback, TouchableOpacity, TouchableHighlight, Image, SafeAreaView, Button, Alert, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, TouchableWithoutFeedback, TouchableOpacity, TouchableHighlight, Image, SafeAreaView, Button, Alert, Dimensions, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native'; // Import useNavigation
 import { useEffect, useState } from 'react';
 
@@ -65,8 +65,16 @@ export const DashboardScreen = (props) => {
   return (
     <View style={styles.dashboardContainer}>
       <SafeAreaView style={styles.dashboard}>
-        <Text>Hello, {name}!</Text>
-        <Text>It's time to take your medicine today.</Text>
+        <View style={styles.dashboardIntro}>
+          <Text style={{
+            fontSize: 50,
+            fontWeight: "bold"
+          }}>Hello, {name}!</Text>
+          <Text style={{
+            fontSize: 36,
+            color: "#5AA9E6"
+          }}>It's time to take your medicine today.</Text>
+        </View>
 
         {/* Generate a medicine card for each medication */}
         {patientMeds && patientMeds.length > 0 ? (
@@ -79,12 +87,18 @@ export const DashboardScreen = (props) => {
             >
               <View>
                 <View style={styles.medicineNameContainer}>
-                  <Text>{med.medication_name}</Text>
+                  <Text style={{
+                    left: 20,
+                    fontSize: 26,
+                    fontWeight: "600",
+                  }}>{med.medication_name}</Text>
                 </View>
                 <View style={styles.medicineInfo}>
-                  <Text>Dosage: {med.medication_dosage}</Text>
-                  <Text>Instructions: {med.instructions}</Text>
-                  <Text>Schedule: </Text>
+                  <Text style={{
+                    fontSize: 30,
+                    padding: 10,
+                    color: "#4A4A4A"
+                  }}>Dosage: {med.medication_dosage}</Text>
                 </View>
               </View>
             </TouchableHighlight>
@@ -121,11 +135,18 @@ const styles = StyleSheet.create({
   dashboard: {
     flex: 8,
     backgroundColor: "#FFFFFF",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 20,
+  },
+  dashboardIntro: {
+    padding: 10,
+    gap: 10,
   },
   medicineCard: {
     backgroundColor: "#FFFFFF",
     width: "70%",
-    height: "30%",
+    height: 120,
     borderWidth: 2,
     borderRadius: 15,
     borderColor: "#4FE778",
@@ -134,10 +155,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#4FE778",
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
-    height: "30%",
+    height: 60,
+    justifyContent: "center",
   },
   medicineInfo: {
-
+    alignItems: "center",
   },
   navBarContainer: {
     backgroundColor: "#E1F3FF",

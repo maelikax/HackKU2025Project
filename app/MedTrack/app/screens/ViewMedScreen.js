@@ -43,6 +43,8 @@ function ViewMedScreen(props) {
                 {/* Card shows user more details about their medication */}
                 <View style={{
                     gap: 30,
+                    justifyContent: "center",
+                    alignItems: "center",
                 }}>
                     <Text style={{
                         alignSelf: "center",
@@ -86,10 +88,7 @@ function ViewMedScreen(props) {
                 </View>
 
                 {/* User presses button to take a picture. */}
-                <View style={{
-                    backgroundColor: "#FFFFFF",
-                    fontSize: 40,
-                }}>
+                <View>
                     <Button title="Take Medicine" onPress={handleContinue}></Button>
                 </View>
             </SafeAreaView>
