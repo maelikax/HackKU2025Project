@@ -8,6 +8,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web"
   },
+  "proxy": "http://localhost:3000",
   "dependencies": {
     "@expo/metro-runtime": "~4.0.1",
     "@react-navigation/native": "^7.1.5",

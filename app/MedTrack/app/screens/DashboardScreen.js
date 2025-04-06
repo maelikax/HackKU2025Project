@@ -2,16 +2,46 @@ import React from 'react'
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TouchableWithoutFeedback, TouchableOpacity, TouchableHighlight, Image, SafeAreaView, Button, Alert, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native'; // Import useNavigation
- 
+import { useEffect, useState } from 'react';
+
 export const DashboardScreen = (props) => {
+  console.log("🟢 Component rendered");
   const navigation = useNavigation();  // Use the hook to access the navigation object
+  const [name, setName] = useState("");
+  const patientId="30470578-572f-48fd-a696-0db0be84e9ec";
+  useEffect(() => {
+    console.log("Fetching patient info...");
+    const fetchPatientInfo = async () => {
+      try {
+        const response = await fetch(`http://localhost:3000/patient/${patientId}/info`);
+        console.log("Response Status:", response.status);
+  
+        // Only parse the response once
+        const data = await response.json();
+        console.log("Parsed Data:", data); // Log the parsed JSON
+  
+        // Assuming response has a 'first_name' field
+        if (data.patientinfo && data.patientinfo[0] && data.patientinfo[0].first_name) {
+          setName(data.patientinfo[0].first_name); // Use the name from the array
+        } else {
+          console.error("No 'first_name' found in the response data");
+        }
+      } catch (error) {
+        console.error("Failed to fetch patient info:", error);
+      }
+    };
+  
+    fetchPatientInfo();
+  }, []);
+  
+  
 
   return (
     <View style={styles.dashboardContainer}>
       {/* Dashboard where user can see their status and what medicines to take. */}
       <SafeAreaView style={styles.dashboard}>
         {/* Text to greet user and to let them know if they are on time or late to take their medicine. Will additionally let user know if they took the wrong medication. */}
-        <Text>Hello, Mikaela!</Text>
+        <Text>Hello, {name}!</Text>
         <Text>It's time to take your medicine today.</Text>
 
         {/* Card that shows the user their medicines, will only show they medication they haven't taken yet. Includes the dosage, instructions, and the schedule */}
