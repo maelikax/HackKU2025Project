@@ -2,10 +2,15 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableWithoutFeedback, TouchableOpacity, TouchableHighlight, Image, SafeAreaView, Button, Alert, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native'; // Import useNavigation
 import {useCameraPermissions, useMicrophonePermissions} from 'expo-camera';
+import { useRoute } from '@react-navigation/native';
 
 function ViewMedScreen(props) {
     console.log("Viewing med screen now");  // Checks if app navigated from dashboard to view med screen successfully
-
+    const route = useRoute();
+    const { med } = route.params;
+    const med_name=med.medication_name;
+    const dosage=med.medication_dosage;
+    const instructions=med.instructions;
     const navigation = useNavigation();  // Use the hook to access the navigation object
 
     {/* Need to ask for permission from user, and keep track of status for camera */}
@@ -50,7 +55,7 @@ function ViewMedScreen(props) {
                         alignSelf: "center",
                         fontSize: 50,
                         fontWeight: "bold",
-                    }}>Levothyroxine</Text>
+                    }}>{med_name}</Text>
 
                     <View style={{
                         gap: 10,
@@ -64,11 +69,11 @@ function ViewMedScreen(props) {
                         <Text style={{
                             fontSize: 30,
                             fontWeight: "500",
-                        }}>Dosage: 12 MCG</Text>
+                        }}>Dosage: {dosage}</Text>
                         <Text style={{
                             fontSize: 20,
                         }}>
-                            Take 1 pill once a day on an empty stomach. Preferably 1/2 to 1 hour before breakfast. You make take this medicine with water. Do not drink or eat after 30 minutes of taking the medicine.
+                            {instructions}
                         </Text>
                         <Text style={{
                             fontSize: 20,

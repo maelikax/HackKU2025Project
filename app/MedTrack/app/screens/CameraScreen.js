@@ -1,10 +1,11 @@
 import React from 'react';
 import { StyleSheet, View, Text, Button, Alert, Image } from 'react-native';
 import { useCameraPermissions, CameraView } from 'expo-camera';
+import { useNavigation } from '@react-navigation/native';
 
 function CameraScreen(props) {
     console.log("Viewing camera screen now");
-
+    const navigation = useNavigation();
     const cameraRef = React.useRef(null);
     const [permission, requestPermission] = useCameraPermissions();
     const [photo, setPhoto] = React.useState(null);
@@ -30,8 +31,14 @@ function CameraScreen(props) {
                     method: 'POST',
                     body: formData,
                 });
-
+                
                 const result = await response.json();
+                if(result.match == "True"){
+                    navigation.navigate("GoodResult");
+                }
+                else{
+                    navigation.navigate("BadResult");
+                }
                 console.log("Response from server:", result);
                 if (response.ok) {
                     Alert.alert("Success", "Image uploaded successfully!");

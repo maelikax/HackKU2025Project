@@ -15,7 +15,7 @@ function GoodResultScreen(props) {
               <Text style={{
                 fontSize: 36,
                 color: "#5AA9E6"
-              }}>You have successfully taken the right medicine. See you nextime!</Text>
+              }}>You have successfully taken the right medicine. </Text>
             </View>
           </SafeAreaView>
     
