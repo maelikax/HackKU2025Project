@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native'; // Import useNavigatio
  
 export const DashboardScreen = (props) => {
   const navigation = useNavigation();  // Use the hook to access the navigation object
-  
+
   return (
     <View style={styles.dashboardContainer}>
       {/* Dashboard where user can see their status and what medicines to take. */}
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   dashboard: {
-    flex: 10,
+    flex: 8,
     backgroundColor: "#FFFFFF",
   },
   medicineCard: {
@@ -88,6 +88,7 @@ const styles = StyleSheet.create({
   },
   navBarButtons: {
     flexDirection: "row",
+    gap: "10%",
   },
   
 });
