@@ -1,8 +1,11 @@
 import React from 'react'
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TouchableWithoutFeedback, TouchableOpacity, TouchableHighlight, Image, SafeAreaView, Button, Alert, Dimensions } from 'react-native';
+import { useNavigation } from '@react-navigation/native'; // Import useNavigation
  
 export const DashboardScreen = (props) => {
+  const navigation = useNavigation();  // Use the hook to access the navigation object
+  
   return (
     <View style={styles.dashboardContainer}>
       {/* Dashboard where user can see their status and what medicines to take. */}
@@ -14,7 +17,7 @@ export const DashboardScreen = (props) => {
         {/* Card that shows the user their medicines, will only show they medication they haven't taken yet. Includes the dosage, instructions, and the schedule */}
         <TouchableHighlight 
           style={styles.medicineCard}
-          onPress={() => console.log("Medicine card pressed")}
+          onPress={() => navigation.navigate('ViewMed')}
           underlayColor="#D4D4D4"
         >
           <View>

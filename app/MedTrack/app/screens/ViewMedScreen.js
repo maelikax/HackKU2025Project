@@ -1,78 +1,43 @@
 import React from 'react';
+import { StyleSheet, Text, View, TouchableWithoutFeedback, TouchableOpacity, TouchableHighlight, Image, SafeAreaView, Button, Alert, Dimensions } from 'react-native';
+import { useNavigation } from '@react-navigation/native'; // Import useNavigation
 
 function ViewMedScreen(props) {
+    console.log("Viewing med screen now");  // Checks if app navigated from dashboard to view med screen successfully
+
     return (
-        <View style={styles.dashboardContainer}>
+        <View>
             {/* Dashboard where user can see their status and what medicines to take. */}
-            <SafeAreaView style={styles.dashboard}>
+            <SafeAreaView>
                 {/* Card shows user more details about their medication */}
-                <View style={styles.medicineNameContainer}>
+                <View>
                     <Text>Levothyroxine</Text>
                 </View>
-                <View style={styles.medicineInfo}>
+
+                <View>
                     <Text>Dosage: 112 MCG</Text>
-                    <Text>Instructions: Take 1 pill once a day on an empty stomach. Do not drink or eat after 30 minutes.</Text>
+                    <Text>
+                        Instructions: Take 1 pill once a day on an empty stomach. Preferably 1/2 to 1 hour before breakfast. You make take this medicine with water. Do not drink or eat after 30 minutes of taking the medicine.
+                    </Text>
+                    <Text>
+                        Take thhis medication at least 4 hours before taking antacids, iron, or vitamin/mineral supplements.
+                    </Text>
+                    <Text>
+                        Take or use this medicine exactly as directed. Do not skip doses or discontinue unless directed by doctor.
+                    </Text>
+                    <Text>
+                        Check with your doctor before including grapefruit or grapefruit juice in your diet.
+                    </Text>
                     <Text>Daily, 8:00 AM</Text>
                 </View>
-            </SafeAreaView>
 
-            {/* User presses button to take a picture. */}
-            <View style={styles.navBarContainer}>
-                {/* User can navigate to home, profile, contacts/call, and sign out. */}
-                <View style={styles.navBarButtons}>
-                <TouchableHighlight>
-                    <Image source={require("../assets/homeIcon.png")} />
-                </TouchableHighlight>
-                <TouchableHighlight>
-                    <Image source={require("../assets/profileIcon.png")} />
-                </TouchableHighlight>
-                <TouchableHighlight>
-                    <Image source={require("../assets/phoneIcon.png")} />
-                </TouchableHighlight>
-                <TouchableHighlight>
-                    <Image source={require("../assets/signoutIcon.png")} />
-                </TouchableHighlight>
+                {/* User presses button to take a picture. */}
+                <View>
+                    <Button title="Take Medicine"></Button>
                 </View>
-            </View>
+            </SafeAreaView>
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    dashboardContainer: {
-      flex: 1
-    },
-    dashboard: {
-      flex: 10,
-      backgroundColor: "#FFFFFF",
-    },
-    medicineCard: {
-      backgroundColor: "#FFFFFF",
-      width: "70%",
-      height: "30%",
-      borderWidth: 2,
-      borderRadius: 15,
-      borderColor: "#4FE778",
-    },
-    medicineNameContainer: {
-      backgroundColor: "#4FE778",
-      borderTopLeftRadius: 10,
-      borderTopRightRadius: 10,
-      height: "30%",
-    },
-    medicineInfo: {
-  
-    },
-    navBarContainer: {
-      backgroundColor: "#E1F3FF",
-      alignItems: "center",
-      justifyContent: "center",
-      flex: 1,
-    },
-    navBarButtons: {
-      flexDirection: "row",
-    },
-    
-  });
 
 export default ViewMedScreen;
