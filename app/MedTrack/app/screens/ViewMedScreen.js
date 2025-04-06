@@ -71,4 +71,8 @@ function ViewMedScreen(props) {
     );
 };
 
+const styles = StyleSheet.create({
+
+});
+
 export default ViewMedScreen;
