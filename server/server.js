@@ -176,6 +176,8 @@ app.post('/process-image', upload.single('image'), async (req, res) => {
       const fetchPatientMedicines = await getTodaysMedications(patientId);
       console.log(fetchPatientMedicines);
       const finalresult = matchMedication(data, fetchPatientMedicines);
+      console.log(finalresult.name);
+      console.log(target_medication);
       if (finalresult.name == target_medication){
         return res.json({ match: "True" })
       }

@@ -74,7 +74,7 @@ export const DashboardScreen = (props) => {
             <TouchableHighlight 
               key={index} 
               style={styles.medicineCard} 
-              onPress={() => navigation.navigate('ViewMed')}
+              onPress={() => navigation.navigate('ViewMed', { med: med })}
               underlayColor="#D4D4D4"
             >
               <View>

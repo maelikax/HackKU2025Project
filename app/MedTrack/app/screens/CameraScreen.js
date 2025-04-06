@@ -8,13 +8,36 @@ function CameraScreen(props) {
     const cameraRef = React.useRef(null);
     const [permission, requestPermission] = useCameraPermissions();
     const [photo, setPhoto] = React.useState(null);
-
+    const convertUriToFile = async (uri) => {
+        const response = await fetch(uri);
+        const blob = await response.blob();
+        return new File([blob], 'image.jpg', { type: 'image/jpeg' });
+      };
     const takePicture = async () => {
         if (cameraRef.current) {
             try {
+                const patientId = '30470578-572f-48fd-a696-0db0be84e9ec'
+                const targetMedication='LEVOTHYROXINE'
                 const photoData = await cameraRef.current.takePictureAsync();
                 setPhoto(photoData.uri); // Save the photo URI
                 console.log("Photo taken:", photoData.uri);
+                const file = await convertUriToFile(photoData.uri);
+                const formData = new FormData();
+                formData.append('image', file, 'photo.jpg');
+                formData.append('patient_id', patientId);
+                formData.append('target_medication', targetMedication);
+                const response = await fetch('http://localhost:3000/process-image', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                const result = await response.json();
+                console.log("Response from server:", result);
+                if (response.ok) {
+                    Alert.alert("Success", "Image uploaded successfully!");
+                } else {
+                    Alert.alert("Error", "Failed to upload image");
+                }
             } catch (error) {
                 console.log("Error taking photo:", error);
                 Alert.alert("Error", "Failed to take photo");
