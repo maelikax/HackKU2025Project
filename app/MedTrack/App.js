@@ -6,7 +6,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import DashboardScreen from './app/screens/DashboardScreen';
 import ViewMedScreen from './app/screens/ViewMedScreen';
 import CameraScreen from './app/screens/CameraScreen';
-import ResultScreen from './app/screens/ResultScreen';
+import GoodResultScreen from './app/screens/GoodResultScreen';
+import BadResultScreen from './app/screens/BadResultScreen';
 
 const Stack = createStackNavigator();
 
@@ -21,7 +22,8 @@ export default function App() {
         <Stack.Screen name="Dashboard" component={DashboardScreen} />
         <Stack.Screen name="ViewMed" component={ViewMedScreen} />
         <Stack.Screen name="CamScreen" component={CameraScreen} />
-        <Stack.Screen name="Result" component={ResultScreen} />
+        <Stack.Screen name="GoodResult" component={GoodResultScreen} />
+        <Stack.Screen name="BadResult" component={BadResultScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
