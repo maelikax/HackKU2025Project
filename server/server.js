@@ -133,7 +133,8 @@ app.get('/patient/:patient_id/medications', async (req, res) => {
             medication_id: medication.medication.id,
             medication_name: medication.medication.name,
             medication_dosage: medication.medication.dosage,
-            patient_id: medication.medication.patient_id
+            patient_id: medication.medication.patient_id,
+            instructions: medication.medication.instructions 
         };
     };
     const patient_medications = medications.map(flattenMedication);

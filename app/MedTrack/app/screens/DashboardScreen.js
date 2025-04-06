@@ -8,6 +8,7 @@ export const DashboardScreen = (props) => {
   console.log("🟢 Component rendered");
   const navigation = useNavigation();  // Use the hook to access the navigation object
   const [name, setName] = useState("");
+  const [patientMeds, setpatientMeds] = useState();
   const patientId="30470578-572f-48fd-a696-0db0be84e9ec";
   useEffect(() => {
     console.log("Fetching patient info...");
@@ -19,7 +20,7 @@ export const DashboardScreen = (props) => {
         // Only parse the response once
         const data = await response.json();
         console.log("Parsed Data:", data); // Log the parsed JSON
-  
+        
         // Assuming response has a 'first_name' field
         if (data.patientinfo && data.patientinfo[0] && data.patientinfo[0].first_name) {
           setName(data.patientinfo[0].first_name); // Use the name from the array
@@ -33,39 +34,67 @@ export const DashboardScreen = (props) => {
   
     fetchPatientInfo();
   }, []);
+  useEffect(() => {
+    console.log("Fetching patient info...");
+    const fetchPatientMedicines = async () => {
+      try {
+        const response = await fetch(`http://localhost:3000/patient/${patientId}/medications`);
+        console.log("Response Status:", response.status);
+  
+        // Only parse the response once
+        const data = await response.json();
+        console.log("Parsed Data:", data); // Log the parsed JSON
+        
+        // Assuming response has a 'first_name' field
+        if (data.patient_medications) {
+          setpatientMeds(data.patient_medications); // Use the name from the array
+          console.log(patientMeds);
+        } else {
+          console.error("No data found in the response data");
+        }
+      } catch (error) {
+        console.error("Failed to fetch patient info:", error);
+      }
+    };
+  
+    fetchPatientMedicines();
+  }, []);
   
   
 
   return (
     <View style={styles.dashboardContainer}>
-      {/* Dashboard where user can see their status and what medicines to take. */}
       <SafeAreaView style={styles.dashboard}>
-        {/* Text to greet user and to let them know if they are on time or late to take their medicine. Will additionally let user know if they took the wrong medication. */}
         <Text>Hello, {name}!</Text>
         <Text>It's time to take your medicine today.</Text>
 
-        {/* Card that shows the user their medicines, will only show they medication they haven't taken yet. Includes the dosage, instructions, and the schedule */}
-        <TouchableHighlight 
-          style={styles.medicineCard}
-          onPress={() => navigation.navigate('ViewMed')}
-          underlayColor="#D4D4D4"
-        >
-          <View>
-            <View style={styles.medicineNameContainer}>
-              <Text>Levothyroxine</Text>
-            </View>
-            <View style={styles.medicineInfo}>
-                <Text>Dosage: 112 MCG</Text>
-                <Text>Instructions: Take 1 pill once a day on an empty stomach. Do not drink or eat after 30 minutes.</Text>
-                <Text>Daily, 8:00 AM</Text>
-            </View>
-          </View>
-        </TouchableHighlight>
+        {/* Generate a medicine card for each medication */}
+        {patientMeds && patientMeds.length > 0 ? (
+          patientMeds.map((med, index) => (
+            <TouchableHighlight 
+              key={index} 
+              style={styles.medicineCard} 
+              onPress={() => navigation.navigate('ViewMed')}
+              underlayColor="#D4D4D4"
+            >
+              <View>
+                <View style={styles.medicineNameContainer}>
+                  <Text>{med.medication_name}</Text>
+                </View>
+                <View style={styles.medicineInfo}>
+                  <Text>Dosage: {med.medication_dosage}</Text>
+                  <Text>Instructions: {med.instructions}</Text>
+                  <Text>Schedule: </Text>
+                </View>
+              </View>
+            </TouchableHighlight>
+          ))
+        ) : (
+          <Text>No medications today</Text>
+        )}
       </SafeAreaView>
 
-      {/* Navigation bar for user to easily see their home screen, profile, contact their providers, and easy way to sign out. Will additionally have user login. */}
       <View style={styles.navBarContainer}>
-        {/* User can navigate to home, profile, contacts/call, and sign out. */}
         <View style={styles.navBarButtons}>
           <TouchableHighlight>
             <Image source={require("../assets/homeIcon.png")} />
