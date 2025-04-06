@@ -25,7 +25,13 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
+      "expo-video",
+      [ "expo-media-library",{ "photosPermission": "Allow $(PRODUCT_NAME) to access your photos.", "savePhotosPermission": "Allow $(PRODUCT_NAME) to save photos.", "isAccessMediaLocationEnabled": true } ],
+      [ "expo-camera", { "cameraPermission": "Allow $(PRODUCT_NAME) to access your photos.", "microphonePermission": "Allow $(PRODUCT_NAME) to save photos.", "recordAudioAndriod": true } ],
       "expo-video"
-    ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
   }
 }

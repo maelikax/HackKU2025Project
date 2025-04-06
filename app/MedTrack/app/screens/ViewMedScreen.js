@@ -1,22 +1,21 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableWithoutFeedback, TouchableOpacity, TouchableHighlight, Image, SafeAreaView, Button, Alert, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native'; // Import useNavigation
-import {usePermissions} from 'expo-media-library';
 import {useCameraPermissions, useMicrophonePermissions} from 'expo-camera';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function ViewMedScreen(props) {
     console.log("Viewing med screen now");  // Checks if app navigated from dashboard to view med screen successfully
 
+    const navigation = useNavigation();  // Use the hook to access the navigation object
+
     {/* Need to ask for permission from user, and keep track of status for camera */}
     const [cameraPermissions, requestCameraPermission] = useCameraPermissions();
     const [microphonePermissions, requestMicrophonePermission] = useMicrophonePermissions();
-    const [mediaLibraryPermissions, requestMediaLibraryPermission] = usePermissions();
 
     async function handleContinue() {
         const allPermissions = await requestAllPermissions();
         if(allPermissions) {
-            router.replace("/(tabs)")
+            navigation.navigate('CamScreen')
         } else {
             Alert.alert("To continue please provide permissions in settings");
         }
@@ -31,11 +30,6 @@ function ViewMedScreen(props) {
         }
         const microphoneStatus = await requestMicrophonePermission();
         if(!microphoneStatus.granted) {
-            Alert.alert("Error", "Camera permissions is required")
-            return false;
-        }
-        const mediaLibraryStatus = await requestMediaLiibraryPermission();
-        if(!mediaLibraryStatus.granted) {
             Alert.alert("Error", "Camera permissions is required")
             return false;
         }

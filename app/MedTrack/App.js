@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import DashboardScreen from './app/screens/DashboardScreen';
 import ViewMedScreen from './app/screens/ViewMedScreen';
+import CameraScreen from './app/screens/CameraScreen';
 
 const Stack = createStackNavigator();
 
@@ -18,6 +19,7 @@ export default function App() {
       <Stack.Navigator initialRouteName="Dashboard">
         <Stack.Screen name="Dashboard" component={DashboardScreen} />
         <Stack.Screen name="ViewMed" component={ViewMedScreen} />
+        <Stack.Screen name="CamScreen" component={CameraScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
