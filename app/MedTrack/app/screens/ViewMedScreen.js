@@ -37,33 +37,59 @@ function ViewMedScreen(props) {
     }
 
     return (
-        <View>
+        <View style={styles.container}>
             {/* Dashboard where user can see their status and what medicines to take. */}
-            <SafeAreaView>
+            <SafeAreaView style={styles.medInfo}>
                 {/* Card shows user more details about their medication */}
-                <View>
-                    <Text>Levothyroxine</Text>
-                </View>
+                <View style={{
+                    gap: 30,
+                }}>
+                    <Text style={{
+                        alignSelf: "center",
+                        fontSize: 50,
+                        fontWeight: "bold",
+                    }}>Levothyroxine</Text>
 
-                <View>
-                    <Text>Dosage: 112 MCG</Text>
-                    <Text>
-                        Instructions: Take 1 pill once a day on an empty stomach. Preferably 1/2 to 1 hour before breakfast. You make take this medicine with water. Do not drink or eat after 30 minutes of taking the medicine.
-                    </Text>
-                    <Text>
-                        Take this medication at least 4 hours before taking antacids, iron, or vitamin/mineral supplements.
-                    </Text>
-                    <Text>
-                        Take or use this medicine exactly as directed. Do not skip doses or discontinue unless directed by doctor.
-                    </Text>
-                    <Text>
-                        Check with your doctor before including grapefruit or grapefruit juice in your diet.
-                    </Text>
-                    <Text>Daily, 8:00 AM</Text>
+                    <View style={{
+                        gap: 10,
+                        padding: 25,
+                        backgroundColor: "#FFFFFF",
+                        borderRadius: 15,
+                        borderColor: "#7FC8F8",
+                        borderWidth: 2,
+                        width: "80%",
+                    }}>
+                        <Text style={{
+                            fontSize: 30,
+                            fontWeight: "500",
+                        }}>Dosage: 12 MCG</Text>
+                        <Text style={{
+                            fontSize: 20,
+                        }}>
+                            Take 1 pill once a day on an empty stomach. Preferably 1/2 to 1 hour before breakfast. You make take this medicine with water. Do not drink or eat after 30 minutes of taking the medicine.
+                        </Text>
+                        <Text style={{
+                            fontSize: 20,
+                        }}>
+                            Take or use this medicine exactly as directed. Do not skip doses or discontinue unless directed by doctor.
+                        </Text>
+                        <Text style={{
+                            fontSize: 20,
+                        }}>
+                            Check with your doctor before including grapefruit or grapefruit juice in your diet.
+                        </Text>
+                        <Text style={{
+                            fontSize: 30,
+                            fontWeight: "500",
+                        }}>Daily, 8:00 AM</Text>
+                    </View>
                 </View>
 
                 {/* User presses button to take a picture. */}
-                <View>
+                <View style={{
+                    backgroundColor: "#FFFFFF",
+                    fontSize: 40,
+                }}>
                     <Button title="Take Medicine" onPress={handleContinue}></Button>
                 </View>
             </SafeAreaView>
@@ -72,7 +98,15 @@ function ViewMedScreen(props) {
 };
 
 const styles = StyleSheet.create({
-
+    container: {
+        flex: 1,
+        backgroundColor: "#E1F3FF"
+    },
+    medInfo: {
+        flex: 1,
+        justifyContent: "space-evenly",
+        alignItems: "center",
+    },
 });
 
 export default ViewMedScreen;
